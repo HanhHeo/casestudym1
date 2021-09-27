@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index2.html">
+    <title>Bảng thu ngân</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="icon/avata.jpg" class="logo">
+        </header>
+
+        <div class="order">
+            <h1>Hóa Đơn Shop SH</h1>
+            <span>
+                <strong>ID khách hàng</strong> <input type="placeholder" class="kh" id="tenKH">
+            </span>
+            <ul class="order-items">
+                <li>
+                    <span><strong>Áo sơ mi</strong></span>
+                    <span>
+                        <input type="number" onchange="ao_so_mi()" id="soluong_ao_somi" value="1" min="0" />
+                    </span>
+
+                    <span>
+                        <span id="result">Giá 250 VNĐ</span>
+                    </span>
+
+                </li> <br>
+                <li>
+                    <span><strong>Quần tây</strong></span>
+                    <span>
+                        <input type="number" onchange="quan_tay()" id="soluong_quan_tay" value="1" min=0 />
+                    </span>
+                    <span>
+                        <span id="result1">Giá 350 VNĐ</span>
+                </li>
+                <br>
+                <li>
+                    <span class="giay"><strong>Giày</strong></span>
+                    <span>
+                        <input  class="giay2" type="number" onchange="giay()" id="soluong_giay" value="1" min=0 />
+                    </span>
+                
+                    <span class="gia" id="result2">Giá450 VNĐ</span>
+                </li>
+            </ul>
+            <div>
+                <p class="tong" id="total">Tổng tiền :<span>1050VNĐ</span></p>
+            </div>
+            <button class="check-out" onclick="xuat()" id="checkout">Xuất hóa đơn</button>
+        </div>
+    </div>
+    <script>
+        function ao_so_mi() {
+            let soluong_ao_somi = document.getElementById("soluong_ao_somi").value;
+            don_gia = 250 * soluong_ao_somi;
+            document.getElementById("result").innerHTML = don_gia + " VNĐ";
+            let quan_tay = document.getElementById("soluong_quan_tay").value;
+            don_gia1 = 350 * quan_tay;
+            let total = don_gia1 + don_gia + don_gia2;
+            console.log(total);
+            document.getElementById("total").innerHTML = total + " VNĐ";
+
+        }
+        function quan_tay() {
+            let quan_tay = document.getElementById("soluong_quan_tay").value;
+            don_gia1 = 350 * quan_tay;
+
+            document.getElementById("result1").innerHTML = don_gia1 + " VNĐ";
+
+            let soluong_ao_somi = document.getElementById("soluong_ao_somi").value;
+            don_gia = 250 * soluong_ao_somi;
+
+            let total = don_gia1 + don_gia + don_gia2;
+            console.log(total);
+            document.getElementById("total").innerHTML = total + " VNĐ";
+        }
+        function giay() {
+            let giay = document.getElementById("soluong_giay").value;
+            don_gia2 = 450 * giay;
+
+            document.getElementById("result2").innerHTML = don_gia2 + " VNĐ";
+            let soluong_ao_somi = document.getElementById("soluong_ao_somi").value;
+            don_gia = 250 * soluong_ao_somi;
+
+            let quan_tay = document.getElementById("soluong_quan_tay").value;
+            don_gia1 = 350 * quan_tay;
+
+            let total = don_gia + don_gia1 + don_gia2;
+            console.log(total);
+            document.getElementById("total").innerHTML = total + " VNĐ";
+        }
+
+        function xuat() {
+            let tenKH = document.getElementById("tenKH").value;
+            let listProduct = [
+                {
+                    "name": "Áo sơ mi",
+                    "amount": document.getElementById("soluong_ao_somi").value,
+                    "price": 250,
+                    "total": document.getElementById("result").innerHTML
+                },
+                {
+                    "name": "Quần tây",
+                    "amount": document.getElementById("soluong_quan_tay").value,
+                    "price": 350,
+                    "total": document.getElementById("result1").innerHTML
+                },
+                {
+                    "name": "Giày",
+                    "amount": document.getElementById("soluong_giay").value,
+                    "price": 450,
+                    "total": document.getElementById("result2").innerHTML
+                }
+            ];
+            console.log(listProduct);
+            window.localStorage.setItem("total", document.getElementById("total").innerHTML);
+            window.localStorage.setItem("tenKH", document.getElementById("tenKH").value);
+            window.localStorage.setItem("listProduct", JSON.stringify(listProduct));
+            window.location.href = "index2.html";
+        }
+    </script>
+</body>
+</html>

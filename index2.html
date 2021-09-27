@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css">
+    <title>In xuất hóa đơn</title>
+</head>
+<body>
+    <div class="container">
+       <h1 class="header">Hóa đơn bán hàng</h1>
+        <h3>ID khách hàng : <strong id="tenKH"></strong></h3>
+         <table border="1" class="table-striped">
+            <thead>
+                <tr>
+                    <td>Tên mặt hàng</td>
+                    <td>Số lượng</td>
+                    <td>Đơn giá</td>
+                    <td>Thành tiền</td>
+                </tr>
+            </thead>
+            <tbody id="kq">
+            </tbody>
+     </div>
+    </table>
+
+    <div> <strong>
+            <strong id="total"></strong>
+        </strong></div>
+    <script>
+        window.onload = function () {
+            let listProduct = window.localStorage.getItem("listProduct");
+            let tenKH = window.localStorage.getItem("tenKH");
+            let total = window.localStorage.getItem("total");
+
+            document.getElementById("tenKH").innerHTML = tenKH;
+            document.getElementById("total").innerHTML = total;
+
+            listProduct = JSON.parse(listProduct);
+            console.log(listProduct);
+            let html = "";
+                 for (let product of listProduct) 
+                 {
+                    html += `<tr> 
+                        <td>${product.name} </td>
+                        <td>${product.amount}</td> 
+                        <td> ${product.price} </td>
+                        <td> ${product.total} </td>
+                        </tr>`;
+                }
+             document.getElementById("kq").innerHTML = html ;
+        }
+
+</script>
+    </div>
+</body>
+
+</html>
